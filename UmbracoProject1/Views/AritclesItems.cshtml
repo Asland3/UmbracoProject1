@@ -1,0 +1,45 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.AritclesItems>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "Master.cshtml";
+	
+	var image = Model.Value<IPublishedContent>("articleImage");
+    var imageUrl = image?.Url();
+    
+}
+
+<!DOCTYPE HTML>
+
+		<!-- Jumbotron, w title -->
+		<div class="jumbotron text-center jumbotron-fluid">
+			<div class="container">
+				<h1 class="display-1">@Model.Value("articleTitle")</h1>
+			</div>
+		</div>
+
+		<!-- Main container -->
+		<!-- Blogpost meta data -->
+		<div class="container-fluid grey-bg">
+			<div class="container">
+				<div class="row section">
+				    
+				    
+				    <img src="@imageUrl" alt="Image description">
+				   
+					
+		</div>	
+		
+
+
+		<!-- Blogpost content -->
+        <div class="container">
+
+			<div class="row section">
+				<div class="col-md-12">
+				
+
+					<p	@Model.Value("articleContent")</p>
+				</div>
+			</div>
+		</div>

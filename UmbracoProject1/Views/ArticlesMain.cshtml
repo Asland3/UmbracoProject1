@@ -1,0 +1,59 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.ArticlesMain>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "Master.cshtml";
+}
+
+<!DOCTYPE HTML>
+
+		<!-- Jumbotron, w title -->
+		<div class="jumbotron text-center jumbotron-fluid">
+			<div class="container">
+				<h1 class="display-1">@Model.Value("articlesTitle")</h1>
+			</div>
+		</div>
+
+		<!-- Main container -->
+		<div class="container">
+
+			<!-- Featured blogpost -->
+			<div class="row section">
+				<div class="col-md-12">
+		@Model.Value("articlesBodyText")
+				</div>
+			</div>
+
+			<!-- Latest blog posts -->
+			
+@{
+	var selection = Umbraco.Content(Guid.Parse("5021589f-4fe0-4ca3-8a79-0674f845017a"))
+    .ChildrenOfType("aritclesItems")
+    .Where(x => x.IsVisible())
+    .OrderByDescending(x => x.CreateDate);
+}
+<div class="container mb-5">
+	<div class="row">
+		@foreach (var item in selection)
+		{
+			<div class="col-md-4">
+				<div class="card shadow-sm">
+					<div class="card-body">
+						<article class="special">
+							<h5 class="card-title"><a href="@item.Url()">@item.Name()</a></h5>
+							<small class="card-subtitle mb-2 text-muted">@item.CreateDate</small>
+							<a href="@item.Url()" class="card-link">Read More..</a>
+						</article>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+</div>
+
+
+
+
+			
+
+		</div>
